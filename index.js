@@ -3,7 +3,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
-const API_URL = "https://secrets-api.appbrewery.com/";
+const API_URL = "https://secrets-api.appbrewery.com";
 
 const yourUsername = "Hamish";
 const yourPassword = "1234";
@@ -54,7 +54,12 @@ app.get("/basicAuth", async (req, res) => {
 app.get("/apiKey", async (req, res) => {
 
   try {
-    const response = await axios.get(API_URL + `/filter?score=5&apiKey=${yourAPIKey}`);
+    const response = await axios.get(API_URL + '/filter', {
+      params: {
+        score: 5,
+        apiKey: yourAPIKey
+      }
+    });
     const result = response.data;
     const content = JSON.stringify(result);
    
